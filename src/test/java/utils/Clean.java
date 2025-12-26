@@ -4,7 +4,7 @@ import static com.codeborne.selenide.Selenide.executeJavaScript;
 
 public class Clean {
 
-    public void cleanBanner(){
+    public static void cleanBanner(){
         executeJavaScript("$('#fixedban').remove()");
         executeJavaScript("$('footer').remove()");
     }

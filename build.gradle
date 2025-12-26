@@ -15,7 +15,8 @@ dependencies {
             'org.junit.jupiter:junit-jupiter:5.10.2',
             'org.junit.platform:junit-platform-launcher:6.0.1',
             'com.codeborne:selenide:7.13.0',
-            'org.slf4j:slf4j-api:2.0.13',
+            'org.slf4j:slf4j-simple:2.0.17',
+            'com.github.javafaker:javafaker:1.0.2'
     )
 }
 
