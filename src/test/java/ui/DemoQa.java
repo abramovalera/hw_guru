@@ -18,7 +18,7 @@ public class DemoQa {
     String lastName = "Ivanov";
     String userEmail = "Test@mail.ru";
     String userNumber = "8000000000";
-    String subjectsInput = "English";
+    String subjects = "English";
     String currentAddress = "Test Test!";
     String picture = "enot.png";
     String month = "September";
@@ -53,7 +53,7 @@ public class DemoQa {
         $("[aria-label='Previous Month']").click();
         $(".react-datepicker__month").$(byText(date)).click();
 
-        $("#subjectsInput").setValue(subjectsInput).pressEnter();
+        $("#subjectsInput").setValue(subjects).pressEnter();
 
         $("label[for=hobbies-checkbox-1]").click();
         $("label[for=hobbies-checkbox-2]").click();
@@ -80,7 +80,8 @@ public class DemoQa {
                 text("Sports, Reading, Music"),
                 text(picture),
                 text(currentAddress),
-                text("NCR Delhi")
+                text("NCR Delhi"),
+                text("English")
         );
 
         $("#closeLargeModal").click();
