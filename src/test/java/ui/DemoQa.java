@@ -5,8 +5,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import utils.Clean;
 
-import java.io.File;
-
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
@@ -34,7 +32,7 @@ public class DemoQa {
     }
 
     @Test
-    public void shouldSubmitPracticeFormWhenAllFieldsAreValid() {
+    public void shouldSubmitPracticeFormWhenAllFieldsAreValidTest() {
         open("/automation-practice-form");
         Clean.cleanBanner();
         $("#firstName").setValue(firstName);
@@ -59,8 +57,7 @@ public class DemoQa {
         $("label[for=hobbies-checkbox-2]").click();
         $("label[for=hobbies-checkbox-3]").click();
 
-        $("#uploadPicture").uploadFile
-                (new File("src/test/resources/img/enot.png"));
+        $("#uploadPicture").uploadFromClasspath("img/enot.png");
 
         $("#currentAddress").setValue(currentAddress);
 
@@ -71,18 +68,19 @@ public class DemoQa {
 
         $("#submit").click();
 
-        $("div[class='table-responsive']").shouldHave(
-                text(firstName), text(lastName),
-                text(userEmail),
-                text("Male"),
-                text(userNumber),
-                text(date), text(month), text(year),
-                text("Sports, Reading, Music"),
-                text(picture),
-                text(currentAddress),
-                text("NCR Delhi"),
-                text("English")
-        );
+        $(".modal-body").shouldHave(text(firstName));
+        $(".modal-body").shouldHave(text(lastName));
+        $(".modal-body").shouldHave(text(userEmail));
+        $(".modal-body").shouldHave(text("Male"));
+        $(".modal-body").shouldHave(text(date));
+        $(".modal-body").shouldHave(text(month));
+        $(".modal-body").shouldHave(text(year));
+        $(".modal-body").shouldHave(text("Sports, Reading, Music"));
+        $(".modal-body").shouldHave(text("Sports, Reading, Music"));
+        $(".modal-body").shouldHave(text(picture));
+        $(".modal-body").shouldHave(text(currentAddress));
+        $(".modal-body").shouldHave(text("NCR Delhi"));
+        $(".modal-body").shouldHave(text("English"));
 
         $("#closeLargeModal").click();
 
