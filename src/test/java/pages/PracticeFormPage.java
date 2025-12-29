@@ -3,8 +3,7 @@ package pages;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 
-import java.util.Map;
-
+import static com.codeborne.selenide.Condition.appear;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
@@ -26,7 +25,8 @@ public class PracticeFormPage {
             stateInput = $("#state"),
             cityInput = $("#city"),
             submitInput = $("#submit"),
-            herderInput = $(".text-center");
+            herderInput = $(".text-center"),
+            resultModalTitle = $("#example-modal-sizes-title-lg");
 
     public PracticeFormPage openPage(String url) {
         open(url);
@@ -123,6 +123,11 @@ public class PracticeFormPage {
 
     public PracticeFormPage checkPageHeader() {
         herderInput.shouldBe(text("Practice Form"));
+        return this;
+    }
+
+    public PracticeFormPage checkResultModalNotVisible() {
+        resultModalTitle.shouldNot(appear);
         return this;
     }
 }

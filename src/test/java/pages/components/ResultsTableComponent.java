@@ -1,7 +1,6 @@
 package pages.components;
 
 import com.codeborne.selenide.SelenideElement;
-import pages.PracticeFormPage;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
@@ -24,9 +23,5 @@ public class ResultsTableComponent {
 
     public void closeLargeModal() {
         closeLargeModalInput.click();
-    }
-
-    public SelenideElement tableResponsive(){
-        return tableResponsiveInput;
     }
 }

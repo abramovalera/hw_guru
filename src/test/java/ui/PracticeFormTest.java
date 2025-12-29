@@ -2,8 +2,15 @@ package ui;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import pages.PracticeFormPage;
+import pages.components.CalendarComponent;
+import pages.components.ResultsTableComponent;
 
 public class PracticeFormTest extends TestBase {
+
+    PracticeFormPage practiceFormPage = new PracticeFormPage();
+    CalendarComponent calendarComponent = new CalendarComponent();
+    ResultsTableComponent resultsTableComponent = new ResultsTableComponent();
 
     @DisplayName("Форма отправляется успешно, когда все поля заполнены корректно")
     @Test
@@ -69,8 +76,7 @@ public class PracticeFormTest extends TestBase {
                 .removeBanner()
                 .setGender("Male")
                 .setUserNumber("8000000000")
-                .submit();
-        resultsTableComponent
-                .tableResponsive().shouldNotBe();
+                .submit()
+                .checkResultModalNotVisible();
     }
 }
