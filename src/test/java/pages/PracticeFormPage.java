@@ -3,8 +3,9 @@ package pages;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 
-import static com.codeborne.selenide.Condition.appear;
-import static com.codeborne.selenide.Condition.text;
+import java.util.List;
+
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -26,7 +27,8 @@ public class PracticeFormPage {
             cityInput = $("#city"),
             submitInput = $("#submit"),
             herderInput = $(".text-center"),
-            resultModalTitle = $("#example-modal-sizes-title-lg");
+            resultModalTitle = $("#example-modal-sizes-title-lg"),
+            subjectMenuInput = $(".subjects-auto-complete__menu");
 
     public PracticeFormPage openPage(String url) {
         open(url);
@@ -72,10 +74,20 @@ public class PracticeFormPage {
         return this;
     }
 
-    public PracticeFormPage setSubjects(String value) {
-        subjectsInput.setValue(value).pressEnter();
+    /**
+     * Выбирает предмет в поле "Subjects" путем ввода буквы.
+     *
+     * @param letter буква для ввода в поле Subjects
+     * @return текущий экземпляр PracticeFormPage
+     */
+    public PracticeFormPage setSubjects(String letter) {
+        subjectsInput.clear();
+        subjectsInput.setValue(letter);
+        subjectMenuInput.shouldBe(visible);
+        subjectsInput.pressEnter();
         return this;
     }
+
 
     /**
      * Отмечает переданные в hobbies чек-боксы
@@ -83,7 +95,7 @@ public class PracticeFormPage {
      * @param hobbies название hobbies (например: Sports)
      * @return текущий экземпляр PracticeFormPage
      */
-    public PracticeFormPage setHobbies(String... hobbies) {
+    public PracticeFormPage setHobbies(List<String> hobbies) {
         for (String hobby : hobbies) {
             hobbiesInput
                     .findBy(text(hobby))
@@ -93,13 +105,13 @@ public class PracticeFormPage {
     }
 
     /**
-     * Загрузка файла формата png
+     * Загрузка файла из classpath.
      *
-     * @param value имя файла без (.png)
+     * @param filePath путь к файлу относительно classpath (например, "img/png.png")
      * @return текущий экземпляр PracticeFormPage
      */
-    public PracticeFormPage uploadPicture(String value) {
-        uploadPictureInput.uploadFromClasspath("img/" + value + ".png");
+    public PracticeFormPage uploadPicture(String filePath) {
+        uploadPictureInput.uploadFromClasspath(filePath);
         return this;
     }
 
@@ -108,6 +120,13 @@ public class PracticeFormPage {
         return this;
     }
 
+    /**
+     * Устанавливает штат и город.
+     *
+     * @param state название штата
+     * @param city название города
+     * @return текущий экземпляр PracticeFormPage
+     */
     public PracticeFormPage setStateAndCity(String state, String city) {
         stateInput.click();
         $(byText(state)).click();
@@ -131,3 +150,4 @@ public class PracticeFormPage {
         return this;
     }
 }
+

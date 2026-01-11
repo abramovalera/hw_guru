@@ -18,32 +18,35 @@ public class PracticeFormTest extends TestBase {
         practiceFormPage
                 .openPage("/automation-practice-form")
                 .removeBanner()
-                .setFirstName("Vova")
-                .setLastName("Ivanov")
-                .setEmail("Test@mail.ru")
-                .setGender("Male")
-                .setUserNumber("8000000000");
-        calendarComponent
-                .setData("5", "May", "1995");
+                .setFirstName(testData.firstName)
+                .setLastName(testData.lastName)
+                .setEmail(testData.email)
+                .setGender(testData.gender)
+                .setUserNumber(testData.phone);
+        
+        calendarComponent.setDate(testData.day, testData.month, testData.year);
+        
         practiceFormPage
-                .setSubjects("e")
-                .setHobbies("Sports", "Reading")
-                .uploadPicture("enot")
-                .setCurrentAddress("ул. Донская, д. 8, стр. 1, 119049")
-                .setStateAndCity("NCR", "Delhi")
+                .setSubjects(testData.subjectLetter)
+                .setHobbies(testData.hobbies)
+                .uploadPicture(testData.classpathFile)
+                .setCurrentAddress(testData.address)
+                .setStateAndCity(testData.state, testData.city)
                 .submit();
+        
         resultsTableComponent
-                .checkResult("Student Name", "Vova" + " " + "Ivanov")
-                .checkResult("Student Email", "Test@mail.ru")
-                .checkResult("Gender", "Male")
-                .checkResult("Mobile", "8000000000")
-                .checkResult("Date of Birth", "5" + " " + "May" + "," + "1995")
-                .checkResult("Subjects", "e")
-                .checkResult("Hobbies", "Sports" + ", " + "Reading")
-                .checkResult("Picture", "enot")
-                .checkResult("Address", "ул. Донская, д. 8, стр. 1, 119049")
-                .checkResult("State and City", "NCR" + " " + "Delhi")
+                .checkResult("Student Name", testData.getFullName())
+                .checkResult("Student Email", testData.email)
+                .checkResult("Gender", testData.gender)
+                .checkResult("Mobile", testData.phone)
+                .checkResult("Date of Birth", testData.getFormattedDate())
+                .checkResult("Subjects", testData.subject)
+                .checkResult("Hobbies", testData.getFormattedHobbies())
+                .checkResult("Picture", testData.expectedFileName)
+                .checkResult("Address", testData.address)
+                .checkResult("State and City", testData.getFormattedStateCity())
                 .closeLargeModal();
+        
         practiceFormPage
                 .checkPageHeader();
     }
@@ -54,15 +57,15 @@ public class PracticeFormTest extends TestBase {
         practiceFormPage
                 .openPage("/automation-practice-form")
                 .removeBanner()
-                .setFirstName("Vova")
-                .setLastName("Ivanov")
-                .setGender("Male")
-                .setUserNumber("8000000000")
+                .setFirstName(testData.firstName)
+                .setLastName(testData.lastName)
+                .setGender(testData.gender)
+                .setUserNumber(testData.phone)
                 .submit();
         resultsTableComponent
-                .checkResult("Student Name", "Vova" + " " + "Ivanov")
-                .checkResult("Gender", "Male")
-                .checkResult("Mobile", "8000000000")
+                .checkResult("Student Name", testData.getFullName())
+                .checkResult("Gender", testData.gender)
+                .checkResult("Mobile", testData.phone)
                 .closeLargeModal();
         practiceFormPage
                 .checkPageHeader();
@@ -74,8 +77,8 @@ public class PracticeFormTest extends TestBase {
         practiceFormPage
                 .openPage("/automation-practice-form")
                 .removeBanner()
-                .setGender("Male")
-                .setUserNumber("8000000000")
+                .setGender(testData.gender)
+                .setUserNumber(testData.phone)
                 .submit()
                 .checkResultModalNotVisible();
     }

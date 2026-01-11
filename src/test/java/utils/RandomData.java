@@ -5,10 +5,10 @@ import com.github.javafaker.Faker;
 import java.util.Locale;
 
 public class RandomData {
-    private final Faker faker = new Faker(new Locale("eu"));
+    private final Faker faker = new Faker(new Locale("en"));
 
     public String firstName() {
-        return faker.name().firstName();
+       return faker.name().firstName();
     }
 
     public String lastName() {
@@ -19,8 +19,8 @@ public class RandomData {
         return faker.internet().emailAddress();
     }
 
-    public String phoneRu() {
-        return "8" + faker.phoneNumber().subscriberNumber(9);
+    public String phone() {
+        return faker.phoneNumber().subscriberNumber(10);
     }
 
     public String address() {
