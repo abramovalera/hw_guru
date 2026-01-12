@@ -23,9 +23,7 @@ public class PracticeFormTest extends TestBase {
                 .setEmail(testData.email)
                 .setGender(testData.gender)
                 .setUserNumber(testData.phone);
-        
         calendarComponent.setDate(testData.day, testData.month, testData.year);
-        
         practiceFormPage
                 .setSubjects(testData.subjectLetter)
                 .setHobbies(testData.hobbies)
@@ -33,7 +31,6 @@ public class PracticeFormTest extends TestBase {
                 .setCurrentAddress(testData.address)
                 .setStateAndCity(testData.state, testData.city)
                 .submit();
-        
         resultsTableComponent
                 .checkResult("Student Name", testData.getFullName())
                 .checkResult("Student Email", testData.email)
@@ -46,7 +43,6 @@ public class PracticeFormTest extends TestBase {
                 .checkResult("Address", testData.address)
                 .checkResult("State and City", testData.getFormattedStateCity())
                 .closeLargeModal();
-        
         practiceFormPage
                 .checkPageHeader();
     }
