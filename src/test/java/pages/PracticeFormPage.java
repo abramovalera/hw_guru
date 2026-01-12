@@ -2,6 +2,7 @@ package pages;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import utils.RandomUtils;
 
 import java.util.List;
 
@@ -75,19 +76,37 @@ public class PracticeFormPage {
     }
 
     /**
-     * Выбирает предмет в поле "Subjects" путем ввода буквы.
+     * Выбирает предмет в поле "Subjects" с повторными попытками.
+     * <p>
+     * Метод несколько раз вводит случайную букву в поле Subjects
+     * и проверяет, появился ли выпадающий список с вариантами.
+     * Если список появился — выбирается первый доступный предмет.
+     * </p>
+     * <p>
+     * Если после заданного количества попыток (attempts)
+     * предмет выбрать не удалось, тест завершается с ошибкой.
+     * </p>
      *
-     * @param letter буква для ввода в поле Subjects
-     * @return текущий экземпляр PracticeFormPage
+     * @param randomUtils утилитный класс для генерации случайных букв
+     *                    для поля Subjects
+     * @return текущий экземпляр {@link PracticeFormPage}
      */
-    public PracticeFormPage setSubjects(String letter) {
-        subjectsInput.clear();
-        subjectsInput.setValue(letter);
-        subjectMenuInput.shouldBe(visible);
-        subjectsInput.pressEnter();
-        return this;
-    }
+    public PracticeFormPage setSubjects(RandomUtils randomUtils) {
+        int attempts = 5;
 
+        for (int i = 0; i < attempts; i++) {
+            subjectsInput.clear();
+
+            String letter = randomUtils.randomSubjectLetter();
+            subjectsInput.setValue(letter);
+
+            if (subjectMenuInput.is(visible)) {
+                subjectsInput.pressEnter();
+                return this;
+            }
+        }
+        throw new AssertionError("Не удалось выбрать Subjects");
+    }
 
     /**
      * Отмечает переданные в hobbies чек-боксы
