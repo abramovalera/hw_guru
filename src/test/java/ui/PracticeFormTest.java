@@ -25,7 +25,7 @@ public class PracticeFormTest extends TestBase {
                 .setUserNumber(testData.phone);
         calendarComponent.setDate(testData.day, testData.month, testData.year);
         practiceFormPage
-                .setSubjects(randomUtils)
+                .setSubjects(testData.subjectLetter)
                 .setHobbies(testData.hobbies)
                 .uploadPicture(testData.classpathFile)
                 .setCurrentAddress(testData.address)

@@ -3,17 +3,13 @@ package ui;
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import utils.RandomData;
-import utils.RandomUtils;
 
 public class TestBase {
-    protected RandomUtils randomUtils = new RandomUtils();
-    protected RandomData randomData = new RandomData();
     protected TestData testData;
 
     @BeforeEach
     public void setupTest() {
-        testData = new TestData(randomData, randomUtils);
+        testData = new TestData();
     }
 
     @BeforeAll
