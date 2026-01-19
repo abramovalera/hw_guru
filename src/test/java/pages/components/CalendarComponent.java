@@ -1,9 +1,11 @@
 package pages.components;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 
-import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 
 public class CalendarComponent {
 
@@ -12,9 +14,9 @@ public class CalendarComponent {
     /**
      * Устанавливает дату рождения.
      *
-     * @param day день (например, "15")
+     * @param day   день (например, "15")
      * @param month месяц (например, "May")
-     * @param year год (например, "1995")
+     * @param year  год (например, "1995")
      */
     public void setDate(String day, String month, String year) {
         openDatePicker();
@@ -37,8 +39,11 @@ public class CalendarComponent {
 
     private void selectDay(String day) {
         String formattedDay = formatDay(day);
-        $(".react-datepicker__day--0" + formattedDay)
-                .shouldBe(visible)
+
+        ElementsCollection days = $$(".react-datepicker__day--0" + formattedDay);
+        days.filter(Condition.visible)
+                .filter(Condition.not(Condition.cssClass("react-datepicker__day--outside-month")))
+                .first()
                 .click();
     }
 
