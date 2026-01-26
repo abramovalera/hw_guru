@@ -1,0 +1,4 @@
+firstName,lastName,email,phone,gender
+Ivan,Petrov,ivan.petrov@example.com,1234567890,Male
+Maria,Ivanova,maria.ivanova@example.com,9876543210,Female
+Alex,Smith,alex.smith@example.com,5555555555,Other
